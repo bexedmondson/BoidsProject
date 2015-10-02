@@ -13,7 +13,8 @@ class BOIDSPROJECT_API ABoidController : public AAIController
 {
 	GENERATED_BODY()
 	
-	
+public:
+	ABoidController(const FObjectInitializer& ObjectInitializer);
 	
 	
 };

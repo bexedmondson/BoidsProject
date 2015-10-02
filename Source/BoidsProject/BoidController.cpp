@@ -3,6 +3,10 @@
 #include "BoidsProject.h"
 #include "BoidController.h"
 
+ABoidController::ABoidController(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
 
+}
 
 
