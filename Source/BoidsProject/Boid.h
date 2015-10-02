@@ -12,7 +12,15 @@ class BOIDSPROJECT_API ABoid : public AActor
 	
 public:	
 	// Sets default values for this actor's properties
-	ABoid();
+	ABoid(const FObjectInitializer& ObjectInitializer);
+
+
+
+	/** Boid movement component */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
+	UNavMovementComponent* BoidMovement;
+
+
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -20,6 +28,5 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	
 	
 };

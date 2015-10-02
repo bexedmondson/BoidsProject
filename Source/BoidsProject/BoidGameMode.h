@@ -13,7 +13,9 @@ class BOIDSPROJECT_API ABoidGameMode : public AGameMode
 {
 	GENERATED_BODY()
 
-		virtual void StartPlay() override;
+	ABoidGameMode(const FObjectInitializer& ObjectInitializer);
+		
+	virtual void StartPlay() override;
 	
 	
 };

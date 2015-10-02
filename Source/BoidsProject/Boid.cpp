@@ -5,10 +5,15 @@
 
 
 // Sets default values
-ABoid::ABoid()
+ABoid::ABoid(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Use a NavMovementComponent to govern the boid's movement
+	BoidMovement = ObjectInitializer.CreateDefaultSubobject<UNavMovementComponent>(this, TEXT("BoidComp"));
+
 
 }
 
@@ -16,6 +21,11 @@ ABoid::ABoid()
 void ABoid::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("We are using Boid.cpp!"));
+	}
 	
 }
 
@@ -24,7 +34,6 @@ void ABoid::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
-
-
 }
+
 
