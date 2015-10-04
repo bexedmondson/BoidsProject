@@ -14,7 +14,15 @@ ABoid::ABoid(const FObjectInitializer& ObjectInitializer)
 	// Use a NavMovementComponent to govern the boid's movement
 	BoidMovement = ObjectInitializer.CreateDefaultSubobject<UNavMovementComponent>(this, TEXT("BoidComp"));
 
-
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeMeshAsset(TEXT("StaticMesh'/Game/Meshes/paperplane0_0.paperplane0_0'"));
+	if (CubeMeshAsset.Succeeded())
+	{
+		PrimaryActorTick.bCanEverTick = true;
+		BoidVisualComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BoidVisualComponent"));
+		BoidVisualComponent->SetStaticMesh(CubeMeshAsset.Object);
+		RootComponent = BoidVisualComponent;
+		SetActorEnableCollision(true);
+	}
 }
 
 // Called when the game starts or when spawned
