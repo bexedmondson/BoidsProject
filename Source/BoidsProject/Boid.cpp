@@ -11,16 +11,13 @@ ABoid::ABoid(const FObjectInitializer& ObjectInitializer)
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// Use a NavMovementComponent to govern the boid's movement
-	BoidMovement = ObjectInitializer.CreateDefaultSubobject<UNavMovementComponent>(this, TEXT("BoidComp"));
-
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeMeshAsset(TEXT("StaticMesh'/Game/Meshes/paperplane0_0.paperplane0_0'"));
 	if (CubeMeshAsset.Succeeded())
 	{
 		PrimaryActorTick.bCanEverTick = true;
-		BoidVisualComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BoidVisualComponent"));
-		BoidVisualComponent->SetStaticMesh(CubeMeshAsset.Object);
-		RootComponent = BoidVisualComponent;
+		BoidMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BoidMesh"));
+		BoidMesh->SetStaticMesh(CubeMeshAsset.Object);
+		RootComponent = BoidMesh;
 		SetActorEnableCollision(true);
 	}
 }

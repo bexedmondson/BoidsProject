@@ -16,5 +16,10 @@ class BOIDSPROJECT_API ABoidController : public AAIController
 public:
 	ABoidController(const FObjectInitializer& ObjectInitializer);
 	
-	
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+protected:
+	UWorld* World;
+
 };

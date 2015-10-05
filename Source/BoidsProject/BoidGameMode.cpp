@@ -2,6 +2,7 @@
 
 #include "BoidsProject.h"
 #include "BoidGameMode.h"
+#include "BoidController.h"
 #include "Boid.h"
 
 ABoidGameMode::ABoidGameMode(const FObjectInitializer& ObjectInitializer)
@@ -20,6 +21,9 @@ void ABoidGameMode::StartPlay()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("HELLO WORLD"));
 	}
+
+	ABoidController* boidController = GetWorld()->SpawnActor<ABoidController>(ABoidController::StaticClass());
+
 }
 
 

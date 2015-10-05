@@ -18,7 +18,7 @@ public:
 
 	/** Boid movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
-	UNavMovementComponent* BoidMovement;
+	FVector velocity;
 
 
 
@@ -30,6 +30,6 @@ public:
 
 
 protected:
-	UStaticMeshComponent* BoidVisualComponent;
+	UStaticMeshComponent* BoidMesh;
 
 };
