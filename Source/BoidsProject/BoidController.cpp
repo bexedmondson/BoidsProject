@@ -43,10 +43,12 @@ void ABoidController::GenerateBoids() {
 	for (int i = 0; i < numOfBoids; i++) {
 		//randomise spawn point and rotation
 		boidLocation = FMath::RandPointInBox(spawnBox);
-		boidRotation = FRotator(FMath::FRandRange(0.0, 1.0), FMath::FRandRange(0.0, 1.0), FMath::FRandRange(0.0, 1.0));
+		boidRotation = FRotator(FMath::RandRange(-90, 90), FMath::RandRange(-180, 180), FMath::RandRange(-180, 180));
 
+		//spawn boid
 		ABoid* boid = GetWorld()->SpawnActor<ABoid>(ABoid::StaticClass(), boidLocation, boidRotation);
 
+		//add boid to array for boid algorithm calculations
 		boidArray[i] = boid;
 	}
 }
