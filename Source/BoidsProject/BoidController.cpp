@@ -16,13 +16,18 @@ void ABoidController::BeginPlay()
 
 	World = GetWorld();
 
+	numOfBoids = 10;
+	boidArray[numOfBoids] = { };
+
 	FVector boidLocation = FVector(180, 30, 80);
 	FRotator boidRotation = FRotator(0.0f);
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < numOfBoids; i++) {
 		boidLocation += FVector(0, 10, 0);
 
 		ABoid* boid = GetWorld()->SpawnActor<ABoid>(ABoid::StaticClass(), boidLocation, boidRotation);
+
+		boidArray[i] = boid;
 	}
 	
 }
