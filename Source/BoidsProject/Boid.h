@@ -35,4 +35,6 @@ public:
 protected:
 	UStaticMeshComponent* BoidMesh;
 
+	void SetVelocity(FVector newVelocity);
+
 };

@@ -17,11 +17,6 @@ void ABoidGameMode::StartPlay()
 
 	StartMatch();
 
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("HELLO WORLD"));
-	}
-
 	ABoidController* boidController = GetWorld()->SpawnActor<ABoidController>(ABoidController::StaticClass());
 
 }

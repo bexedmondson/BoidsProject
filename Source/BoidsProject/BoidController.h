@@ -2,8 +2,10 @@
 
 #pragma once
 
+#include "Boid.h"
 #include "AIController.h"
 #include "BoidController.generated.h"
+
 
 /**
  * 
@@ -19,7 +21,17 @@ public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-protected:
-	UWorld* World;
+	// Called every frame
+	virtual void Tick(float DeltaSeconds) override;
+	
+	//number of boids to be spawned
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
+	int numOfBoids;
 
+protected:
+	UWorld* World;	
+
+	ABoid* boidArray[];
+
+	void GenerateBoids();
 };
