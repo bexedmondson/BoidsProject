@@ -32,11 +32,18 @@ void ABoidController::Tick(float DeltaTime)
 
 
 void ABoidController::GenerateBoids() {
-	FVector boidLocation = FVector(200, 30, 80);
-	FRotator boidRotation = FRotator(0.0f);
+	//box where boids will be spawned
+	FVector spawnBoxMin = FVector(0, 50, 20);
+	FVector spawnBoxMax = FVector(-120, -50, 200);
+	FBox spawnBox = FBox(spawnBoxMin, spawnBoxMax);
+
+	FVector boidLocation = FVector();
+	FRotator boidRotation = FRotator();
 
 	for (int i = 0; i < numOfBoids; i++) {
-		boidLocation += FVector(0, 10, 0);
+		//randomise spawn point and rotation
+		boidLocation = FMath::RandPointInBox(spawnBox);
+		boidRotation = FRotator(FMath::FRandRange(0.0, 1.0), FMath::FRandRange(0.0, 1.0), FMath::FRandRange(0.0, 1.0));
 
 		ABoid* boid = GetWorld()->SpawnActor<ABoid>(ABoid::StaticClass(), boidLocation, boidRotation);
 
