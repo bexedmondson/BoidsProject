@@ -14,16 +14,16 @@ void ABoidController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//to be removed
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 6.f, FColor::Blue, TEXT("We are using BoidController.cpp!"));
-	}
-
 	World = GetWorld();
 
-	ABoid* boid = GetWorld()->SpawnActor<ABoid>(ABoid::StaticClass(), FVector(180, 30, 80), FRotator(0.0f));
+	FVector boidLocation = FVector(180, 30, 80);
+	FRotator boidRotation = FRotator(0.0f);
 
+	for (int i = 0; i < 10; i++) {
+		boidLocation += FVector(0, 10, 0);
+
+		ABoid* boid = GetWorld()->SpawnActor<ABoid>(ABoid::StaticClass(), boidLocation, boidRotation);
+	}
 	
 }
 

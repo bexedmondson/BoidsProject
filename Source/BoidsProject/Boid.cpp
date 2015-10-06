@@ -26,11 +26,6 @@ ABoid::ABoid(const FObjectInitializer& ObjectInitializer)
 void ABoid::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("We are using Boid.cpp!"));
-	}
 	
 	// scale to be more easily visible
 	SetActorScale3D(FVector(10, 10, 10));
