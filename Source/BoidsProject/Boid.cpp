@@ -31,6 +31,8 @@ void ABoid::BeginPlay()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("We are using Boid.cpp!"));
 	}
+
+	SetActorScale3D(FVector(10, 10, 10));
 	
 }
 
