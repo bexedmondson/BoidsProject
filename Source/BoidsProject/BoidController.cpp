@@ -50,6 +50,7 @@ void ABoidController::GenerateBoids() {
 
 		//add boid to array for boid algorithm calculations
 		boidArray[i] = boid;
+
 	}
 }
 
