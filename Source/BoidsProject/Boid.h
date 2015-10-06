@@ -20,6 +20,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
 	FVector velocity;
 
+	/** Boid rotation component */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
+	FRotator rotation;
 
 
 	// Called when the game starts or when spawned

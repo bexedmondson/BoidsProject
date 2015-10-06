@@ -22,7 +22,7 @@ void ABoidController::BeginPlay()
 
 	World = GetWorld();
 
-	ABoid* boid = GetWorld()->SpawnActor<ABoid>(ABoid::StaticClass(), FVector(180,30,80), FRotator(0.0f));
+	ABoid* boid = GetWorld()->SpawnActor<ABoid>(ABoid::StaticClass(), FVector(180, 30, 80), FRotator(0.0f));
 
 	
 }

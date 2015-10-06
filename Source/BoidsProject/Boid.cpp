@@ -31,8 +31,15 @@ void ABoid::BeginPlay()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("We are using Boid.cpp!"));
 	}
-
+	
+	// scale to be more easily visible
 	SetActorScale3D(FVector(10, 10, 10));
+
+	//initialise velocity
+	velocity = FVector(1.0, 0, 0);
+
+	//initialise rotation
+	rotation = FRotator(0, 0, 0);
 	
 }
 
@@ -40,7 +47,7 @@ void ABoid::BeginPlay()
 void ABoid::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-
+	SetActorLocationAndRotation(GetActorLocation() + velocity, rotation);
 }
 
 
