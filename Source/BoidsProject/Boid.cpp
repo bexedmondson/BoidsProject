@@ -31,10 +31,10 @@ void ABoid::BeginPlay()
 	SetActorScale3D(FVector(10, 10, 10));
 
 	//initialise velocity
-	velocity = FVector(1.0, 0, 0);
+	velocity = FVector(-1.0, 0, 0);
 
 	//initialise rotation
-	rotation = FRotator(1, 1, 1);
+	rotation = FRotator(0.0, 0.0, FMath::FRandRange(0.0, 1.0));
 	
 }
 
@@ -43,6 +43,10 @@ void ABoid::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 	SetActorLocationAndRotation(GetActorLocation() + velocity, GetActorRotation() + rotation);
+}
+
+void ABoid::SetVelocity(FVector newVelocity) {
+	velocity = newVelocity;
 }
 
 

@@ -19,7 +19,20 @@ void ABoidController::BeginPlay()
 	numOfBoids = 10;
 	boidArray[numOfBoids] = { };
 
-	FVector boidLocation = FVector(180, 30, 80);
+	GenerateBoids();
+	
+}
+
+
+// Called every frame
+void ABoidController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
+
+void ABoidController::GenerateBoids() {
+	FVector boidLocation = FVector(200, 30, 80);
 	FRotator boidRotation = FRotator(0.0f);
 
 	for (int i = 0; i < numOfBoids; i++) {
@@ -29,6 +42,5 @@ void ABoidController::BeginPlay()
 
 		boidArray[i] = boid;
 	}
-	
 }
 

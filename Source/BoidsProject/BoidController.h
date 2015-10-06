@@ -20,6 +20,9 @@ public:
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	// Called every frame
+	virtual void Tick(float DeltaSeconds) override;
 	
 	//number of boids to be spawned
 	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
@@ -29,4 +32,6 @@ protected:
 	UWorld* World;	
 
 	ABoid* boidArray[];
+
+	void GenerateBoids();
 };
