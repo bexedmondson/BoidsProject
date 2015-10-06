@@ -39,7 +39,7 @@ void ABoid::BeginPlay()
 	velocity = FVector(1.0, 0, 0);
 
 	//initialise rotation
-	rotation = FRotator(0, 0, 0);
+	rotation = FRotator(1, 1, 1);
 	
 }
 
@@ -47,7 +47,7 @@ void ABoid::BeginPlay()
 void ABoid::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-	SetActorLocationAndRotation(GetActorLocation() + velocity, rotation);
+	SetActorLocationAndRotation(GetActorLocation() + velocity, GetActorRotation() + rotation);
 }
 
 
