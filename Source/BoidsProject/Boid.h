@@ -39,4 +39,8 @@ public:
 protected:
 	UStaticMeshComponent* BoidMesh;
 
+	FVector SeparateBoid();
+	FVector AlignBoid();
+	FVector CohereBoid();
+
 };

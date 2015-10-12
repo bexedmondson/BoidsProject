@@ -51,6 +51,25 @@ void ABoid::SetVelocity(FVector newVelocity) {
 
 FVector ABoid::CalculateBoidVelocity()
 {
-	return FVector(1,1,1);
+	FVector separation = SeparateBoid();
+	FVector alignment = AlignBoid();
+	FVector cohesion = CohereBoid();
+	
+	return (separation + alignment + cohesion) / 3;
+}
+
+FVector ABoid::SeparateBoid()
+{
+	return FVector(6, 0, 0);
+}
+
+FVector ABoid::AlignBoid()
+{
+	return FVector(0, 6, 0);
+}
+
+FVector ABoid::CohereBoid()
+{
+	return FVector(0, 0, 6);
 }
 
