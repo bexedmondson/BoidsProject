@@ -31,10 +31,12 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
+	FVector CalculateBoidVelocity();
+
+	void SetVelocity(FVector newVelocity);
+
 
 protected:
 	UStaticMeshComponent* BoidMesh;
-
-	void SetVelocity(FVector newVelocity);
 
 };

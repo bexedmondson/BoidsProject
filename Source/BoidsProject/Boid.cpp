@@ -49,4 +49,8 @@ void ABoid::SetVelocity(FVector newVelocity) {
 	velocity = newVelocity;
 }
 
+FVector ABoid::CalculateBoidVelocity()
+{
+	return FVector(1,1,1);
+}
 
