@@ -51,11 +51,22 @@ void ABoid::SetVelocity(FVector newVelocity) {
 
 FVector ABoid::CalculateBoidVelocity()
 {
+	vector<ABoid> nearbyBoids = GetNearbyBoids();
+
 	FVector separation = SeparateBoid();
 	FVector alignment = AlignBoid();
 	FVector cohesion = CohereBoid();
 	
 	return (separation + alignment + cohesion) / 3;
+}
+
+vector<ABoid> GetNearbyBoids()
+{
+	float MaximumDistance = 60;
+
+	vector<ABoid> boids = { };
+	
+	return boids;
 }
 
 FVector ABoid::SeparateBoid()
