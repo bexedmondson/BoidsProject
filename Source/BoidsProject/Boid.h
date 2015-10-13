@@ -2,10 +2,8 @@
 
 #pragma once
 
-#include <vector>
 #include "GameFramework/Actor.h"
 #include "Boid.generated.h"
-using namespace std;
 
 UCLASS()
 class BOIDSPROJECT_API ABoid : public AActor
@@ -40,8 +38,6 @@ public:
 
 protected:
 	UStaticMeshComponent* BoidMesh;
-
-	vector<ABoid> GetNearbyBoids();
 
 	FVector SeparateBoid();
 	FVector AlignBoid();
