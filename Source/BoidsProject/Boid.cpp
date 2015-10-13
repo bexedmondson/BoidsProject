@@ -11,6 +11,7 @@ ABoid::ABoid(const FObjectInitializer& ObjectInitializer)
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	// static mesh for visualisation
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeMeshAsset(TEXT("StaticMesh'/Game/Meshes/paperplane0_0.paperplane0_0'"));
 	if (CubeMeshAsset.Succeeded())
 	{
@@ -20,6 +21,12 @@ ABoid::ABoid(const FObjectInitializer& ObjectInitializer)
 		RootComponent = BoidMesh;
 		SetActorEnableCollision(true);
 	}
+
+	// attach sphere for detecting nearby boids
+	USphereComponent* SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
+	SphereComponent->AttachTo(RootComponent);
+	SphereComponent->InitSphereRadius(40.0f);
+	SphereComponent->SetCollisionProfileName("BoidCollider");
 }
 
 // Called when the game starts or when spawned
@@ -50,7 +57,21 @@ void ABoid::SetVelocity(FVector newVelocity) {
 }
 
 FVector ABoid::CalculateBoidVelocity()
-{
+{	
+	TArray<UPrimitiveComponent*> nearbyComponents;
+	GetOverlappingComponents(nearbyComponents);
+
+	for (int i = 0; i < nearbyComponents.Num(); i++) 
+	{
+		UPrimitiveComponent* collidingComponent = nearbyComponents[i];
+		AActor* colliderOwner = collidingComponent->GetOwner();
+
+		if (colliderOwner->IsA(ABoid::StaticClass()))
+		{
+			//do a thing!
+		}
+	}
+
 	FVector separation = SeparateBoid();
 	FVector alignment = AlignBoid();
 	FVector cohesion = CohereBoid();
