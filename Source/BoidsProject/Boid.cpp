@@ -61,6 +61,10 @@ FVector ABoid::CalculateBoidVelocity()
 	TArray<UPrimitiveComponent*> nearbyComponents;
 	GetOverlappingComponents(nearbyComponents);
 
+	std::vector<FVector> nearbyBoidLocations = { };
+	std::vector<FRotator> nearbyBoidRotations = { };
+
+	// iterate over components to find only the boids
 	for (int i = 0; i < nearbyComponents.Num(); i++) 
 	{
 		UPrimitiveComponent* collidingComponent = nearbyComponents[i];
@@ -68,7 +72,11 @@ FVector ABoid::CalculateBoidVelocity()
 
 		if (colliderOwner->IsA(ABoid::StaticClass()))
 		{
-			//do a thing!
+			FRotator colliderOwnerRotation = colliderOwner->GetActorRotation();
+			nearbyBoidRotations.push_back(colliderOwnerRotation);
+
+			FVector colliderOwnerLocation = colliderOwner->GetActorLocation();
+			nearbyBoidLocations.push_back(colliderOwnerLocation);
 		}
 	}
 

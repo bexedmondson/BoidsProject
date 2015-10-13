@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <vector>
 #include "GameFramework/Actor.h"
 #include "Boid.generated.h"
 
