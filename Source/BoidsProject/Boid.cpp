@@ -80,25 +80,34 @@ FVector ABoid::CalculateBoidVelocity()
 		}
 	}
 
-	FVector separation = SeparateBoid();
+	FVector separation = SeparateBoid(nearbyBoidLocations);
 	FVector alignment = AlignBoid();
 	FVector cohesion = CohereBoid();
 	
-	return (separation + alignment + cohesion) / 3;
+	return (separation / 3) + (alignment / 3) + (cohesion / 3);
 }
 
-FVector ABoid::SeparateBoid()
+FVector ABoid::SeparateBoid(std::vector<FVector> nearbyBoidLocations)
 {
-	return FVector(6, 0, 0);
+	FVector separationSteer = FVector(0, 0, 0);
+
+	for (int i = 0; i < nearbyBoidLocations.size(); i++) {
+		FVector diff = - GetActorLocation() - nearbyBoidLocations[i];
+
+		separationSteer += diff;
+	}
+	
+	//average out the steer
+	return separationSteer / nearbyBoidLocations.size();
 }
 
 FVector ABoid::AlignBoid()
 {
-	return FVector(0, 6, 0);
+	return FVector(0, 0, 0);
 }
 
 FVector ABoid::CohereBoid()
 {
-	return FVector(0, 0, 6);
+	return FVector(0, 0, 0);
 }
 

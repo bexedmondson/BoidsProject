@@ -40,7 +40,7 @@ public:
 protected:
 	UStaticMeshComponent* BoidMesh;
 
-	FVector SeparateBoid();
+	FVector SeparateBoid(std::vector<FVector> nearbyBoidLocations);
 	FVector AlignBoid();
 	FVector CohereBoid();
 
