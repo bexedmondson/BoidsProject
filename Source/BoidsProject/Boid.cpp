@@ -49,7 +49,12 @@ void ABoid::BeginPlay()
 void ABoid::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-	SetActorLocationAndRotation(GetActorLocation() + velocity, GetActorRotation() + rotation);
+
+	rotation.Pitch = velocity.Y;
+	rotation.Roll = velocity.X;
+	rotation.Yaw = velocity.Z;
+
+	SetActorLocationAndRotation(GetActorLocation() + velocity, rotation); //GetActorRotation() + rotation
 }
 
 void ABoid::SetVelocity(FVector newVelocity) {
