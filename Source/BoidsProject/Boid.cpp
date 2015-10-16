@@ -35,7 +35,7 @@ void ABoid::BeginPlay()
 	Super::BeginPlay();
 	
 	// scale to be more easily visible
-	SetActorScale3D(FVector(10, 10, 10));
+	SetActorScale3D(FVector(50, 50, 50));
 
 	//initialise velocity
 	velocity = FVector(0, 0, 0);
@@ -84,7 +84,7 @@ FVector ABoid::CalculateBoidVelocity()
 	FVector alignment = AlignBoid();
 	FVector cohesion = CohereBoid();
 	
-	return (separation / 3) + (alignment / 3) + (cohesion / 3);
+	return ((separation / 3) + (alignment / 3) + (cohesion / 3)) * 0.05;
 }
 
 FVector ABoid::SeparateBoid(std::vector<FVector> nearbyBoidLocations)
@@ -92,9 +92,15 @@ FVector ABoid::SeparateBoid(std::vector<FVector> nearbyBoidLocations)
 	FVector separationSteer = FVector(0, 0, 0);
 
 	for (int i = 0; i < nearbyBoidLocations.size(); i++) {
-		FVector diff = - GetActorLocation() - nearbyBoidLocations[i];
+		FVector actorLocation = GetActorLocation();
+		FVector nbLocation = nearbyBoidLocations[i];
 
-		separationSteer += diff;
+		if (actorLocation != nbLocation)
+		{
+			FVector diff = actorLocation - nbLocation;
+
+			separationSteer += diff;
+		}
 	}
 	
 	//average out the steer
