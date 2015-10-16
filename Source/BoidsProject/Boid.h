@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <vector>
 #include "GameFramework/Actor.h"
 #include "Boid.generated.h"
 
@@ -31,10 +32,16 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
+	FVector CalculateBoidVelocity();
+
+	void SetVelocity(FVector newVelocity);
+
 
 protected:
 	UStaticMeshComponent* BoidMesh;
 
-	void SetVelocity(FVector newVelocity);
+	FVector SeparateBoid(std::vector<FVector> nearbyBoidLocations);
+	FVector AlignBoid();
+	FVector CohereBoid();
 
 };
