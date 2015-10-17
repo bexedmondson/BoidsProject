@@ -50,9 +50,8 @@ void ABoid::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
-	rotation.Pitch = velocity.Y;
-	rotation.Roll = velocity.X;
-	rotation.Yaw = velocity.Z;
+	// negative because I managed to make the model the wrong way around!
+	rotation = velocity.Rotation().GetInverse();
 
 	SetActorLocationAndRotation(GetActorLocation() + velocity, rotation); //GetActorRotation() + rotation
 }
