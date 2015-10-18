@@ -87,7 +87,7 @@ FVector ABoid::CalculateBoidVelocity()
 	FVector alignment = AlignBoid(nearbyBoidRotations);
 	FVector cohesion = CohereBoid(nearbyBoidLocations);
 	
-	return ((separation * 0.25) + (alignment * 0.25) + (cohesion * 0.5)) * 0.01;
+	return ((separation * 0.35) + (alignment * 0.35) + (cohesion * 0.3)) * 0.1;
 }
 
 FVector ABoid::SeparateBoid(std::vector<FVector> nearbyBoidLocations)
