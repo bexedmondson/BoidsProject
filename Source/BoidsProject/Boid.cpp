@@ -129,6 +129,7 @@ FVector ABoid::AlignBoid(std::vector<FRotator> nearbyBoidRotations)
 FVector ABoid::CohereBoid(std::vector<FVector> nearbyBoidLocations)
 {
 	FVector totalLocations = FVector(0, 0, 0);
+	FVector alignmentSteer = FVector(0, 0, 0);
 	FVector actorLocation = GetActorLocation();
 
 	for (int i = 0; i < nearbyBoidLocations.size(); i++) {
@@ -140,7 +141,9 @@ FVector ABoid::CohereBoid(std::vector<FVector> nearbyBoidLocations)
 		}
 	}
 
-	//average out the total
-	return totalLocations / nearbyBoidLocations.size();
+	//average out the total and get the direction this boid should be steering in
+	alignmentSteer = actorLocation - (totalLocations / nearbyBoidLocations.size());
+
+	return alignmentSteer;
 }
 
