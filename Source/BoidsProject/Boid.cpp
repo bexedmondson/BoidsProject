@@ -87,7 +87,7 @@ FVector ABoid::CalculateBoidVelocity()
 	FVector alignment = AlignBoid(nearbyBoidRotations);
 	FVector cohesion = CohereBoid(nearbyBoidLocations);
 	
-	return ((separation / 3) + (alignment / 3) + (cohesion / 3)) * 0.01;
+	return ((separation * 0.25) + (alignment * 0.25) + (cohesion * 0.5)) * 0.01;
 }
 
 FVector ABoid::SeparateBoid(std::vector<FVector> nearbyBoidLocations)
@@ -129,7 +129,7 @@ FVector ABoid::AlignBoid(std::vector<FRotator> nearbyBoidRotations)
 FVector ABoid::CohereBoid(std::vector<FVector> nearbyBoidLocations)
 {
 	FVector totalLocations = FVector(0, 0, 0);
-	FVector alignmentSteer = FVector(0, 0, 0);
+	FVector cohesionSteer = FVector(0, 0, 0);
 	FVector actorLocation = GetActorLocation();
 
 	for (int i = 0; i < nearbyBoidLocations.size(); i++) {
@@ -142,8 +142,8 @@ FVector ABoid::CohereBoid(std::vector<FVector> nearbyBoidLocations)
 	}
 
 	//average out the total and get the direction this boid should be steering in
-	alignmentSteer = actorLocation - (totalLocations / nearbyBoidLocations.size());
+	cohesionSteer = (totalLocations / nearbyBoidLocations.size()) - actorLocation;
 
-	return alignmentSteer;
+	return cohesionSteer;
 }
 
