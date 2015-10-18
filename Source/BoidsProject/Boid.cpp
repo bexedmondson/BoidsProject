@@ -12,7 +12,7 @@ ABoid::ABoid(const FObjectInitializer& ObjectInitializer)
 	PrimaryActorTick.bCanEverTick = true;
 
 	// static mesh for visualisation
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeMeshAsset(TEXT("StaticMesh'/Game/Meshes/paperplane0_0.paperplane0_0'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeMeshAsset(TEXT("StaticMesh'/Game/Meshes/paperplane1_0.paperplane1_0'"));
 	if (CubeMeshAsset.Succeeded())
 	{
 		PrimaryActorTick.bCanEverTick = true;
@@ -50,8 +50,7 @@ void ABoid::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
-	// negative because I managed to make the model the wrong way around!
-	rotation = velocity.Rotation().GetInverse();
+	rotation = velocity.Rotation();
 
 	SetActorLocationAndRotation(GetActorLocation() + velocity, rotation); //GetActorRotation() + rotation
 }
