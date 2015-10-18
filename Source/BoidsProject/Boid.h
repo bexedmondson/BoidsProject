@@ -41,7 +41,7 @@ protected:
 	UStaticMeshComponent* BoidMesh;
 
 	FVector SeparateBoid(std::vector<FVector> nearbyBoidLocations);
-	FVector AlignBoid();
+	FVector AlignBoid(std::vector<FRotator> nearbyBoidRotations);
 	FVector CohereBoid();
 
 };
