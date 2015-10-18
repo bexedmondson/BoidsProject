@@ -42,6 +42,6 @@ protected:
 
 	FVector SeparateBoid(std::vector<FVector> nearbyBoidLocations);
 	FVector AlignBoid(std::vector<FRotator> nearbyBoidRotations);
-	FVector CohereBoid();
+	FVector CohereBoid(std::vector<FVector> nearbyBoidLocations);
 
 };
