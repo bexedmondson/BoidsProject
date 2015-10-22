@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <vector>
 #include "GameFramework/Actor.h"
 #include "Boid.generated.h"
 
@@ -16,9 +17,13 @@ public:
 
 
 
-	/** Boid movement component */
+	/** Boid current movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
-	FVector velocity;
+	FVector currentVelocity;
+	
+	/** Boid new movement component */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
+	FVector newVelocity;
 
 	/** Boid rotation component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
@@ -31,10 +36,16 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
+	FVector CalculateBoidVelocity();
+
+	void SetVelocity(FVector velocity);
+
 
 protected:
 	UStaticMeshComponent* BoidMesh;
 
-	void SetVelocity(FVector newVelocity);
+	FVector SeparateBoid(std::vector<FVector> nearbyBoidLocations);
+	FVector AlignBoid(std::vector<FRotator> nearbyBoidRotations);
+	FVector CohereBoid(std::vector<FVector> nearbyBoidLocations);
 
 };

@@ -16,7 +16,7 @@ void ABoidController::BeginPlay()
 
 	World = GetWorld();
 
-	numOfBoids = 10;
+	numOfBoids = 40;
 	boidArray[numOfBoids] = { };
 
 	GenerateBoids();
@@ -28,19 +28,27 @@ void ABoidController::BeginPlay()
 void ABoidController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	for (int i = 0; i < numOfBoids; i++)
+	{
+		FVector boidVelocity = boidArray[i]->CalculateBoidVelocity();
+
+		boidArray[i]->SetVelocity(boidVelocity);
+	}
 }
 
 
 void ABoidController::GenerateBoids() {
 	//box where boids will be spawned
-	FVector spawnBoxMin = FVector(0, 50, 20);
-	FVector spawnBoxMax = FVector(-120, -50, 200);
+	FVector spawnBoxMin = FVector(0, 0, 0);
+	FVector spawnBoxMax = FVector(-200, -200, 200);
 	FBox spawnBox = FBox(spawnBoxMin, spawnBoxMax);
 
 	FVector boidLocation = FVector();
 	FRotator boidRotation = FRotator();
 
-	for (int i = 0; i < numOfBoids; i++) {
+	for (int i = 0; i < numOfBoids; i++) 
+	{
 		//randomise spawn point and rotation
 		boidLocation = FMath::RandPointInBox(spawnBox);
 		boidRotation = FRotator(FMath::RandRange(-90, 90), FMath::RandRange(-180, 180), FMath::RandRange(-180, 180));
@@ -50,6 +58,7 @@ void ABoidController::GenerateBoids() {
 
 		//add boid to array for boid algorithm calculations
 		boidArray[i] = boid;
+
 	}
 }
 
