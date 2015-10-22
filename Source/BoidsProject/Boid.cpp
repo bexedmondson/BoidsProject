@@ -2,7 +2,7 @@
 
 #include "BoidsProject.h"
 #include "Boid.h"
-
+//#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
 ABoid::ABoid(const FObjectInitializer& ObjectInitializer)
@@ -38,7 +38,7 @@ void ABoid::BeginPlay()
 	SetActorScale3D(FVector(20, 20, 20));
 
 	//initialise velocity
-	velocity = FVector(0, 0, 0);
+	currentVelocity = FVector(FMath::RandRange(-5.0f, 5.0f), FMath::RandRange(-5.0f, 5.0f), FMath::RandRange(-5.0f, 5.0f));
 
 	//initialise rotation
 	rotation = FRotator(0.0, 0.0, 0.0);
@@ -50,13 +50,17 @@ void ABoid::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
-	rotation = velocity.Rotation();
+	FVector totalVelocity = currentVelocity + newVelocity;
 
-	SetActorLocationAndRotation(GetActorLocation() + velocity, rotation);
+	rotation = totalVelocity.Rotation();
+
+	SetActorLocationAndRotation(GetActorLocation() + totalVelocity, rotation);
+
+	currentVelocity = totalVelocity;
 }
 
-void ABoid::SetVelocity(FVector newVelocity) {
-	velocity = newVelocity;
+void ABoid::SetVelocity(FVector velocity) {
+	newVelocity = velocity;
 }
 
 FVector ABoid::CalculateBoidVelocity()
@@ -87,7 +91,7 @@ FVector ABoid::CalculateBoidVelocity()
 	FVector alignment = AlignBoid(nearbyBoidRotations);
 	FVector cohesion = CohereBoid(nearbyBoidLocations);
 	
-	return ((separation * 0.35) + (alignment * 0.35) + (cohesion * 0.3)) * 0.1;
+	return ((separation * 1) + (alignment * 1) + (cohesion * 1)) * 0.5;
 }
 
 FVector ABoid::SeparateBoid(std::vector<FVector> nearbyBoidLocations)
@@ -100,6 +104,7 @@ FVector ABoid::SeparateBoid(std::vector<FVector> nearbyBoidLocations)
 
 		if (actorLocation != nbLocation)
 		{
+			//current location - other location because steering away from other location
 			FVector diff = actorLocation - nbLocation;
 
 			separationSteer += diff;
@@ -118,7 +123,7 @@ FVector ABoid::AlignBoid(std::vector<FRotator> nearbyBoidRotations)
 	for (int i = 0; i < nearbyBoidRotations.size(); i++) {
 		FRotator nbRotation = nearbyBoidRotations[i];
 
-		FRotator diff = actorRotation - nbRotation;
+		FRotator diff = nbRotation - actorRotation;
 		alignmentSteer += diff;
 	}
 

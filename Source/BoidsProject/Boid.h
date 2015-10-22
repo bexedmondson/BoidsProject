@@ -17,9 +17,13 @@ public:
 
 
 
-	/** Boid movement component */
+	/** Boid current movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
-	FVector velocity;
+	FVector currentVelocity;
+	
+	/** Boid new movement component */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
+	FVector newVelocity;
 
 	/** Boid rotation component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
@@ -34,7 +38,7 @@ public:
 
 	FVector CalculateBoidVelocity();
 
-	void SetVelocity(FVector newVelocity);
+	void SetVelocity(FVector velocity);
 
 
 protected:

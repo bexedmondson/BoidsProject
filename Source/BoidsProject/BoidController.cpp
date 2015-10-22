@@ -16,7 +16,7 @@ void ABoidController::BeginPlay()
 
 	World = GetWorld();
 
-	numOfBoids = 10;
+	numOfBoids = 40;
 	boidArray[numOfBoids] = { };
 
 	GenerateBoids();
@@ -40,8 +40,8 @@ void ABoidController::Tick(float DeltaTime)
 
 void ABoidController::GenerateBoids() {
 	//box where boids will be spawned
-	FVector spawnBoxMin = FVector(0, 50, 20);
-	FVector spawnBoxMax = FVector(-120, -50, 200);
+	FVector spawnBoxMin = FVector(0, 0, 0);
+	FVector spawnBoxMax = FVector(-200, -200, 200);
 	FBox spawnBox = FBox(spawnBoxMin, spawnBoxMax);
 
 	FVector boidLocation = FVector();
