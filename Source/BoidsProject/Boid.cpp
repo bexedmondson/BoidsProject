@@ -38,7 +38,7 @@ void ABoid::BeginPlay()
 	SetActorScale3D(FVector(20, 20, 20));
 
 	//initialise velocity
-	velocity = FVector(FMath::RandRange(-5.0f, 5.0f), FMath::RandRange(-5.0f, 5.0f), FMath::RandRange(-5.0f, 5.0f));
+	currentVelocity = FVector(FMath::RandRange(-5.0f, 5.0f), FMath::RandRange(-5.0f, 5.0f), FMath::RandRange(-5.0f, 5.0f));
 
 	//initialise rotation
 	rotation = FRotator(0.0, 0.0, 0.0);
@@ -50,13 +50,17 @@ void ABoid::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
-	rotation = velocity.Rotation();
+	FVector totalVelocity = currentVelocity + newVelocity;
 
-	SetActorLocationAndRotation(GetActorLocation() + velocity * DeltaTime, rotation);
+	rotation = totalVelocity.Rotation();
+
+	SetActorLocationAndRotation(GetActorLocation() + totalVelocity, rotation);
+
+	currentVelocity = totalVelocity;
 }
 
-void ABoid::SetVelocity(FVector newVelocity) {
-	velocity = newVelocity;
+void ABoid::SetVelocity(FVector velocity) {
+	newVelocity = velocity;
 }
 
 FVector ABoid::CalculateBoidVelocity()
@@ -87,7 +91,7 @@ FVector ABoid::CalculateBoidVelocity()
 	FVector alignment = AlignBoid(nearbyBoidRotations);
 	FVector cohesion = CohereBoid(nearbyBoidLocations);
 	
-	return ((separation * 1) + (alignment * 1) + (cohesion * 0.5)) * 10;
+	return ((separation * 1) + (alignment * 1) + (cohesion * 1)) * 0.5;
 }
 
 FVector ABoid::SeparateBoid(std::vector<FVector> nearbyBoidLocations)
