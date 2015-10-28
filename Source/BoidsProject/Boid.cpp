@@ -63,7 +63,7 @@ void ABoid::SetVelocity(FVector velocity) {
 	newVelocity = velocity;
 }
 
-FVector ABoid::CalculateBoidVelocity()
+FVector ABoid::CalculateBoidVelocity(FVector target)
 {	
 	TArray<UPrimitiveComponent*> nearbyComponents;
 	GetOverlappingComponents(nearbyComponents);
@@ -90,8 +90,10 @@ FVector ABoid::CalculateBoidVelocity()
 	FVector separation = SeparateBoid(nearbyBoidLocations);
 	FVector alignment = AlignBoid(nearbyBoidRotations);
 	FVector cohesion = CohereBoid(nearbyBoidLocations);
+
+	FVector targetDifference = target - GetActorLocation();
 	
-	return ((separation * 1) + (alignment * 1) + (cohesion * 1)) * 0.2;
+	return ((separation * 1) + (alignment * 0.5) + (cohesion * 1) + (targetDifference * 0.5))* 0.01;
 }
 
 FVector ABoid::SeparateBoid(std::vector<FVector> nearbyBoidLocations)

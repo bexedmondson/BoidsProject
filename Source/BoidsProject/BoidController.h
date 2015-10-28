@@ -28,6 +28,9 @@ public:
 	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
 	int numOfBoids;
 
+	//centre of flock
+	FVector flockTarget;
+
 protected:
 	UWorld* World;	
 

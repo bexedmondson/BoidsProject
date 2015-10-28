@@ -20,6 +20,8 @@ void ABoidController::BeginPlay()
 	boidArray[numOfBoids] = { };
 
 	GenerateBoids();
+
+	flockTarget = FVector(600, 600, 600);
 	
 }
 
@@ -31,7 +33,7 @@ void ABoidController::Tick(float DeltaTime)
 
 	for (int i = 0; i < numOfBoids; i++)
 	{
-		FVector boidVelocity = boidArray[i]->CalculateBoidVelocity();
+		FVector boidVelocity = boidArray[i]->CalculateBoidVelocity(flockTarget);
 
 		boidArray[i]->SetVelocity(boidVelocity);
 	}

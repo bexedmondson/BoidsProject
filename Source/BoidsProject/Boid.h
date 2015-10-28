@@ -36,7 +36,7 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	FVector CalculateBoidVelocity();
+	FVector CalculateBoidVelocity(FVector target);
 
 	void SetVelocity(FVector velocity);
 
